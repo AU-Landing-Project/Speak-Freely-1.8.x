@@ -1,6 +1,8 @@
 <?php
 
 	$english = array(
+		'menu:page:header:more' => "More",
+
 		'speak_freely:test' => "Speak Freely Test",
 		'speak_freely:display_name' => "Anonymous",
 		'speak_freely:name_description' => "Anonymous display name: ",

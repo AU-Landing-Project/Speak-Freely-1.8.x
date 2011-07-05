@@ -61,7 +61,7 @@ function speak_freely_pagesetup() {
 
 	if (get_context() == 'admin' && isadminloggedin()) {
 		global $CONFIG;
-		add_submenu_item(elgg_echo('speak_freely:settings'), $CONFIG->wwwroot . 'pg/speak_freely/edit.php');
+		add_submenu_item(elgg_echo('speak_freely:settings'), $CONFIG->wwwroot . 'pg/speak_freely/edit.php', 'more');
 	}
 }
 
