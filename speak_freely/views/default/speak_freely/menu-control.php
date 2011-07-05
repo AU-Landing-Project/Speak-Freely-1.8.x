@@ -20,7 +20,6 @@ $user = get_user($anon_guid);
 //parse URL and look for our username
 for($i=0; $i<count($links); $i++){
 	
-	// do this part last because if it's successful we'll be deleting the object
 	// don't want to call methods on it after this
 	if(strpos($vars['items'][$i]->getContent(), "blog/owner/$user->username")
 		|| strpos($vars['items'][$i]->getContent(), "profile/$user->username")
@@ -29,6 +28,8 @@ for($i=0; $i<count($links); $i++){
 		|| strpos($vars['items'][$i]->getContent(), "messages/compose?send_to=$anon_guid")
 		|| strpos($vars['items'][$i]->getContent(), "action/admin/user/ban?guid=$anon_guid")
 		|| strpos($vars['items'][$i]->getContent(), "action/admin/user/delete?guid=$anon_guid")
+		// and here we're checking for the "Embed" link on the comment form when not logged in
+		|| (!isloggedin() && strpos($vars['items'][$i]->getContent(), "embed?"))
 	){
 		unset($vars['items'][$i]);
 	}

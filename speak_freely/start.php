@@ -88,8 +88,8 @@ register_action("speak_freely_settings", false, $CONFIG->pluginspath . "speak_fr
 elgg_extend_view('page/elements/comments', 'comments/forms/speak_freely_post_edit', 1000);
 
 // remove menu items for our anonymous user
+// also removes the "Embed" link from the comment form if not logged in
 elgg_extend_view('navigation/menu/elements/section', 'speak_freely/menu-control', 0);
-
 
 //add override for anonymous user profile
 elgg_extend_view('profile/details', 'profile/speak_freely_pre_userdetails', 501);
