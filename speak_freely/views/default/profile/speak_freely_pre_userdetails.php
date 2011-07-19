@@ -21,7 +21,7 @@ if (strpos($_SERVER['REQUEST_URI'], "profile/$user->username") && !isadminlogged
 
 
 // they are admin and viewing anon_user - show warning about deletion
-if (isadminloggedin() && $speakfreelywarningcount != 1){
+if (isadminloggedin() && $speakfreelywarningcount != 1 && strpos($_SERVER['REQUEST_URI'], "profile/$user->username")){
 	//counter to prevent more than one display of this view - have to track down that bug
 	$speakfreelywarningcount = 1;
 ?>
