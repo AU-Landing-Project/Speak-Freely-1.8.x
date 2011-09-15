@@ -13,7 +13,7 @@ function set_anonymous_user(){
 	$anon_guid = 0;
 
 	//first see if a user has been created previously
-	$users = get_entities_from_metadata('speak_freely', TRUE, 'user');
+	$users = elgg_get_entities_from_metadata(array('name' => 'speak_freely', 'value' => TRUE, 'types' => 'user'));
 	
 	if(count($users) == 0 || !$users || !($user instanceof ElggUser)){ //no previous user - create a new one
 		//find available username
@@ -49,4 +49,21 @@ function set_anonymous_user(){
 	
 	return $anon_guid;
 }
-?>
+
+
+// called by menu:user_hover plugin hook
+// $params['entity'] is the user
+// $params['name'] is the menu name = "user_hover"
+// $return is an array of items that are already registered to the menu
+function speak_freely_hover_menu($hook, $type, $return, $params) {
+	global $CONFIG;
+	$user = $params['entity'];
+	
+	$anon_guid = get_plugin_setting('anon_guid', 'speak_freely');
+	
+	if($user->guid == $anon_guid){
+		unset($return);
+		
+		return array();	
+	}
+}
