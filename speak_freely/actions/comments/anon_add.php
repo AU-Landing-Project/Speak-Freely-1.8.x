@@ -7,18 +7,19 @@
  */
 action_gatekeeper();
 
+elgg_make_sticky_form('speak_freely');
+
 global $CONFIG;
 
 $entity_guid = (int) get_input('entity_guid');
 
-$_SESSION['speak_freely'] = array();
-$_SESSION['speak_freely']['generic_comment'] = $comment_text = get_input('generic_comment');
-$_SESSION['speak_freely']['anon_name'] = $anon_name = get_input('anon_name');
+$comment_text = get_input('generic_comment');
+$anon_name = get_input('anon_name');
 
 // check if recaptcha was correct - only if recaptcha is turned on
-if(get_plugin_setting('recaptcha','speak_freely') == "yes"){
-	require_once($CONFIG->pluginspath . 'speak_freely/lib/recaptchalib.php');
-	$privatekey = get_plugin_setting('private_key', 'speak_freely');
+if(elgg_get_plugin_setting('recaptcha','speak_freely') == "yes"){
+	require_once(elgg_get_plugins_path() . 'speak_freely/lib/recaptchalib.php');
+	$privatekey = elgg_get_plugin_setting('private_key', 'speak_freely');
 	$resp = recaptcha_check_answer ($privatekey,
 	$_SERVER["REMOTE_ADDR"],
 	$_POST["recaptcha_challenge_field"],
@@ -54,7 +55,7 @@ if (!$entity) {
 $comment_text = $comment_text . "<br>- " . $anon_name;
 
 // get the guid of our anonymous user
-$anon_guid = get_plugin_setting('anon_guid','speak_freely');
+$anon_guid = elgg_get_plugin_setting('anon_guid','speak_freely');
 
 $user = get_user($anon_guid);
 
@@ -138,7 +139,7 @@ system_message(elgg_echo("generic_comment:posted"));
 //add to river
 add_to_river('river/annotation/generic_comment/create', 'comment', $user->guid, $entity->guid, "", 0, $annotation);
 
-unset($_SESSION['speak_freely']);
+elgg_clear_sticky_form('speak_freely');
 
 // Forward to the page the action occurred on
 forward(REFERER);

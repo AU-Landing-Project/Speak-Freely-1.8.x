@@ -4,15 +4,12 @@
  * 
  * This script saves the settings of the plugin
  */
-require_once(dirname(dirname(dirname(dirname(__FILE__)))) . "/engine/start.php");
 
 // only allow admins to post
 admin_gatekeeper();
 
-global $CONFIG;
-
 // get the ID of our anonymous user
-$user_guid = get_plugin_setting('anon_guid','speak_freely');
+$user_guid = elgg_get_plugin_setting('anon_guid','speak_freely');
 
 // get the full user info
 $user = get_user($user_guid);
@@ -76,19 +73,19 @@ if($user){
 	
 	//save whether or not to use recaptcha
 	$recaptcha = get_input('recaptcha');
-	set_plugin_setting('recaptcha', $recaptcha, 'speak_freely');
+	elgg_set_plugin_setting('recaptcha', $recaptcha, 'speak_freely');
 	
 	//save recaptcha style
 	$recaptcha_style = get_input('recaptcha_style');
-	set_plugin_setting('recaptcha_style', $recaptcha_style, 'speak_freely');
+	elgg_set_plugin_setting('recaptcha_style', $recaptcha_style, 'speak_freely');
 	
 	//save public key
 	$public_key = get_input('public_key');
-	set_plugin_setting('public_key', $public_key, 'speak_freely');
+	elgg_set_plugin_setting('public_key', $public_key, 'speak_freely');
 	
 	//save private key
 	$private_key = get_input('private_key');
-	set_plugin_setting('private_key', $private_key, 'speak_freely');
+	elgg_set_plugin_setting('private_key', $private_key, 'speak_freely');
 
 	system_message(elgg_echo('speak_freely:settings_saved'));
 }
@@ -96,5 +93,5 @@ else{
 	register_error(elgg_echo('speak_freely:no_user'));
 }
 
-forward($CONFIG->wwwroot . "pg/speak_freely/edit.php");
+forward(elgg_get_site_url() . "speak_freely/edit.php");
 ?>

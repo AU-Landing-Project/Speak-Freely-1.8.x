@@ -56,14 +56,13 @@ function set_anonymous_user(){
 // $params['name'] is the menu name = "user_hover"
 // $return is an array of items that are already registered to the menu
 function speak_freely_hover_menu($hook, $type, $return, $params) {
-	global $CONFIG;
 	$user = $params['entity'];
 	
-	$anon_guid = get_plugin_setting('anon_guid', 'speak_freely');
+	$anon_guid = elgg_get_plugin_setting('anon_guid', 'speak_freely');
 	
 	if($user->guid == $anon_guid){
-		unset($return);
-		
 		return array();	
 	}
+	
+	return $return;
 }

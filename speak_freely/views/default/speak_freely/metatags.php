@@ -1,1 +1,1 @@
-<link rel="stylesheet" href="<?php echo $vars['url']; ?>mod/speak_freely/css/style.css" type="text/css" />
+<link rel="stylesheet" href="<?php echo elgg_get_site_url(); ?>mod/speak_freely/css/style.css" type="text/css" />
