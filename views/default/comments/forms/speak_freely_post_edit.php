@@ -38,7 +38,12 @@ if (isset($vars['entity']) && !elgg_is_logged_in()) {
 			$form_body .= "};";
 			$form_body .= "</script>"; 
 			
-			$form_body .= recaptcha_get_html($publickey);
+      $usessl = elgg_get_plugin_setting('usessl', 'speak_freely');
+      $ssl = FALSE;
+      if ($usessl == 'yes') {
+        $ssl = TRUE;
+      }
+			$form_body .= recaptcha_get_html($publickey, '', $ssl);
 		}
 
 		$form_body .= elgg_view('input/submit', array('value' => elgg_echo("speak_freely:post:comment"))) . "</p></div>";

@@ -51,6 +51,7 @@ You cannot reply to this email.",
 		'speak_freely:recaptcha_key_instruction' => "New keys can be generated here:",
 		'speak_freely:confirm_user_delete' => "Deleting this user will delete all anonymous comments in the system, this action cannot be undone.  Are you sure you want to proceed?",
 		'speak_freely:post:comment' => "Post Comment",
+    'speak_freely:usessl' => "Use ssl for recaptcha? (use this if your site is using ssl)",
 	);
 					
 	add_translation("en",$english);

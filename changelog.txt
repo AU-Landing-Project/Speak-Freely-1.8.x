@@ -1,4 +1,0 @@
-CHANGELOG
-
-01/21/2012
-Updated some deprecated functions for 1.8.3

@@ -86,6 +86,10 @@ if($user){
 	//save private key
 	$private_key = get_input('private_key');
 	elgg_set_plugin_setting('private_key', $private_key, 'speak_freely');
+  
+  // use ssl
+  $usessl = get_input('usessl');
+  elgg_set_plugin_setting('usessl', $usessl, 'speak_freely');
 
 	system_message(elgg_echo('speak_freely:settings_saved'));
 }
@@ -93,5 +97,5 @@ else{
 	register_error(elgg_echo('speak_freely:no_user'));
 }
 
-forward(elgg_get_site_url() . "speak_freely/edit.php");
+forward(REFERER);
 ?>

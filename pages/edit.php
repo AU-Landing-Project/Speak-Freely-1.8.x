@@ -37,6 +37,9 @@ $public_key = elgg_get_plugin_setting('public_key', 'speak_freely');
 // Current private key
 $private_key = elgg_get_plugin_setting('private_key', 'speak_freely');
 
+// Current ssl setting
+$usessl = elgg_get_plugin_setting('usessl', 'speak_freely');
+
 // start form
 $form = "<div style=\"margin: 15px;\">";
 // username text input
@@ -55,7 +58,7 @@ $form .= elgg_view('input/file', array('name' => 'upload')) . "<br><br>";
 // radio buttons - use recaptcha yes/no
 $form .= "<label>" . elgg_echo("speak_freely:use_recaptcha") . "</label><br>";
 $form .= "<input type=\"radio\" name=\"recaptcha\" value=\"yes\"";
-if($recaptcha == "yes"){ $form .= " checked"; }
+if($recaptcha != "no"){ $form .= " checked"; }
 $form .= ">";
 $form .= "<label>" . elgg_echo("speak_freely:yes") . "</label><br>";
 $form .= "<input type=\"radio\" name=\"recaptcha\" value=\"no\"";
@@ -82,6 +85,18 @@ $form .= "<input type=\"radio\" name=\"recaptcha_style\" value=\"clean\"";
 if($recaptcha_style == "clean"){ $form .= " checked"; }
 $form .= ">";
 $form .= "<label>" . elgg_echo("speak_freely:clean") . "</label><br>";
+$form .= "<br><br>";
+
+// radio buttons - use ssl recaptcha yes/no
+$form .= "<label>" . elgg_echo('speak_freely:usessl') . "</label><br>";
+$form .= "<input type=\"radio\" name=\"usessl\" value=\"yes\"";
+if($usessl != "no"){ $form .= " checked"; }
+$form .= ">";
+$form .= "<label>" . elgg_echo("speak_freely:yes") . "</label><br>";
+$form .= "<input type=\"radio\" name=\"usessl\" value=\"no\"";
+if($usessl == "no"){ $form .= " checked"; }
+$form .= ">";
+$form .= "<label>" . elgg_echo("speak_freely:no") . "</label><br>";
 $form .= "<br><br>";
 
 // text inputs for public and private keys for recaptcha
@@ -116,4 +131,3 @@ $body = elgg_view_layout('one_column', array('content' => $area));
 
 // display the page
 echo elgg_view_page($title, $body);
-?>

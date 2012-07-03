@@ -66,3 +66,19 @@ function speak_freely_hover_menu($hook, $type, $return, $params) {
 	
 	return $return;
 }
+
+
+/**
+ *  Hooks on email,system
+ *  See if the recipient is our anonymous user, if so prevent the email 
+ */
+function speak_freely_anon_email($hook, $type, $returnvalue, $params) {
+  $anon_guid = elgg_get_plugin_setting('anon_guid','speak_freely');
+  $anon_user = get_user($anon_guid);
+  
+  if ($anon_user && $anon_user->email == $params['to']) {
+    return FALSE;
+  }
+  
+  return $returnvalue;
+}
